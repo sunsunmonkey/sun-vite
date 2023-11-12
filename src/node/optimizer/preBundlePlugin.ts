@@ -24,7 +24,6 @@ export function preBundlePlugin(deps: Set<string>): Plugin {
         (resolveInfo) => {
           const { path: id, importer } = resolveInfo;
           const isEntry = !importer;
-          console.log(importer);
           // 命中需要预编译的依赖
           if (deps.has(id)) {
             // 若为入口，则标记 dep 的 namespace

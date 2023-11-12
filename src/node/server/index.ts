@@ -18,3 +18,5 @@ export async function startDevServer() {
     console.log(`> 本地访问路径: ${blue("http://localhost:3000")}`);
   });
 }
+
+export interface ServerContext {}
