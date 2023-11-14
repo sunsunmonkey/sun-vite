@@ -25,9 +25,12 @@ export function scanPlugin(deps: Set<string>): Plugin {
         (resolveInfo) => {
           const { path: id } = resolveInfo;
           // 推入 deps 集合中
+
           deps.add(id);
           return {
             path: id,
+            // 忽略了node_modules的东西从而减少了构建发生时间
+            // external直接略过不再进行递归bundle
             external: true,
           };
         }
