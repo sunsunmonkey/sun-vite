@@ -9,15 +9,19 @@ import { createPluginContainer, PluginContainer } from "../pluginContainer";
 import { Plugin } from "../plugin";
 import { indexHtmlMiddware } from "./middlewares/indexHtml";
 import { transformMiddleware } from "./middlewares/transform";
+import { staticMiddleware } from "./middlewares/static";
+import { ModuleGraph } from "../ModuleGraph";
 
 export interface ServerContext {
   root: string;
   pluginContainer: PluginContainer;
   app: connect.Server;
   plugins: Plugin[];
+  moduleGraph: ModuleGraph;
 }
 
 export async function startDevServer() {
+  const moduleGraph = new ModuleGraph((url) => pluginContainer.resolveId(url));
   const app = connect();
   const root = process.cwd();
   const startTime = Date.now();
@@ -28,6 +32,7 @@ export async function startDevServer() {
     app,
     pluginContainer,
     plugins,
+    moduleGraph,
   };
 
   for (const plugin of plugins) {
@@ -37,7 +42,8 @@ export async function startDevServer() {
   }
   app.use(indexHtmlMiddware(serverContext));
   app.use(transformMiddleware(serverContext));
-  
+  app.use(staticMiddleware(serverContext.root));
+
   app.listen(3000, async () => {
     await optimize(root);
     console.log(
