@@ -11,6 +11,7 @@ import { indexHtmlMiddware } from "./middlewares/indexHtml";
 import { transformMiddleware } from "./middlewares/transform";
 import { staticMiddleware } from "./middlewares/static";
 import { ModuleGraph } from "../ModuleGraph";
+import { normalizePath } from "../utils";
 
 export interface ServerContext {
   root: string;
@@ -28,7 +29,7 @@ export async function startDevServer() {
   const plugins = resolvePlugins();
   const pluginContainer = createPluginContainer(plugins);
   const serverContext: ServerContext = {
-    root: process.cwd(),
+    root: normalizePath(process.cwd()),
     app,
     pluginContainer,
     plugins,

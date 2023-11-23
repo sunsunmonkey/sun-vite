@@ -2,7 +2,6 @@ import { NextHandleFunction } from "connect";
 import { isJSRequest, cleanUrl } from "../../utils";
 import { ServerContext } from "../index";
 import createDebug from "debug";
-import { SourceDescription } from "rollup";
 import { isCSSRequest } from "../../utils";
 import { isImportRequest } from "../../utils";
 

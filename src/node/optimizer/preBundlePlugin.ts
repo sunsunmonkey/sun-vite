@@ -1,7 +1,7 @@
 import { Loader, Plugin } from "esbuild";
 import { BARE_IMPORT_RE } from "../constants";
 // 用来分析 es 模块 import/export 语句的库
-import { ExportSpecifier, init, parse } from "es-module-lexer";
+import {  init, parse } from "es-module-lexer";
 import path from "path";
 // 一个实现了 node 路径解析算法的库
 import resolve from "resolve";
@@ -66,7 +66,7 @@ export function preBundlePlugin(deps: Set<string>): Plugin {
             );
           } else {
             // esm 格式比较好处理，export * 或者 export default 即可
-            if (exports.includes("default" as unknown as ExportSpecifier)) {
+            if (exports.includes("default")) {
               proxyModule.push(`import d from "${entryPath}";export default d`);
             }
             proxyModule.push(`export * from "${entryPath}"`);

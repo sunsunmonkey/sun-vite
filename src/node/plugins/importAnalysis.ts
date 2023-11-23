@@ -1,18 +1,12 @@
 // 新建 src/node/plugins/importAnalysis.ts
 import { init, parse } from "es-module-lexer";
-import {
-  BARE_IMPORT_RE,
-  DEFAULT_EXTERSIONS,
-  PRE_BUNDLE_DIR,
-} from "../constants";
+import { BARE_IMPORT_RE, PRE_BUNDLE_DIR } from "../constants";
 import { cleanUrl, getShortName, isJSRequest, normalizePath } from "../utils";
 // magic-string 用来作字符串编辑
 import MagicString from "magic-string";
 import path from "path";
 import { Plugin } from "../plugin";
 import { ServerContext } from "../server/index";
-import { pathExists } from "fs-extra";
-import resolve from "resolve";
 
 export function importAnalysisPlugin(): Plugin {
   let serverContext: ServerContext;
@@ -60,7 +54,7 @@ export function importAnalysisPlugin(): Plugin {
         // 静态资源
         if (modSource.endsWith(".svg")) {
           // 加上 ?import 后缀
-          const resolvedUrl = path.join(path.dirname(id), modSource);
+          const resolvedUrl = await resolve(modSource, id);
           ms.overwrite(modStart, modEnd, `${resolvedUrl}?import`);
           continue;
         }
