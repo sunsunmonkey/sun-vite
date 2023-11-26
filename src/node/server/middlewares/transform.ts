@@ -26,7 +26,7 @@ export async function transformRequest(
       code = code.code;
     }
     const { moduleGraph } = serverContext;
-    await moduleGraph.ensureEntryFromUrl(url);
+    mod = await moduleGraph.ensureEntryFromUrl(url);
     if (code) {
       transformResult = await pluginContainer.transform(
         code as string,
