@@ -38,6 +38,7 @@ export async function startDevServer() {
     ignored: ["**/node_modules/**", "**/.git/**"],
     ignoreInitial: true,
   });
+  
   const ws = createWebSocketServer(app);
 
   const serverContext: ServerContext = {

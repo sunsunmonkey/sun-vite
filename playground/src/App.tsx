@@ -13,14 +13,14 @@ function App() {
       <Test></Test>
       <header className="App-header">
         <img className="App-logo" alt="" src={logo} />
-        <p>Hello Vite + R1e11sssssscst</p>
+        <p>Hesllo hllsite +sssssssss </p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
+            count is:s {count}
           </button>
         </p>
         <p>
-          Edit <code>App</code> and ssave e test.
+          Edit <code>Appsssl</code> and sssave ells tesst.
         </p>
         <p>
           <a
@@ -31,7 +31,6 @@ function App() {
           >
             Learn React
           </a>
-          {" | "}
           <a
             className="App-link"
             href="https://vitejs.dev/guide/features.html"

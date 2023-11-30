@@ -14,4 +14,5 @@ export default defineConfig({
   sourcemap: true,
   // 没有拆包的需求，关闭拆包能力
   splitting: false,
+  external: ["@babel/core", "react-refresh"],
 });

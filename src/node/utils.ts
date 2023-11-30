@@ -9,6 +9,7 @@ import {
 } from "./constants";
 
 const INTERNAL_LIST = [CLIENT_PUBLIC_PATH, "/@react-refresh"];
+
 export function slash(p: string): string {
   return p.replace(/\\/g, "/");
 }

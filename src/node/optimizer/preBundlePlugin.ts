@@ -1,7 +1,7 @@
 import { Loader, Plugin } from "esbuild";
 import { BARE_IMPORT_RE } from "../constants";
 // 用来分析 es 模块 import/export 语句的库
-import {  init, parse } from "es-module-lexer";
+import { init, parse } from "es-module-lexer";
 import path from "path";
 // 一个实现了 node 路径解析算法的库
 import resolve from "resolve";

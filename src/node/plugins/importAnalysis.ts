@@ -1,6 +1,10 @@
 // 新建 src/node/plugins/importAnalysis.ts
 import { init, parse } from "es-module-lexer";
-import { BARE_IMPORT_RE, CLIENT_PUBLIC_PATH, PRE_BUNDLE_DIR } from "../constants";
+import {
+  BARE_IMPORT_RE,
+  CLIENT_PUBLIC_PATH,
+  PRE_BUNDLE_DIR,
+} from "../constants";
 import {
   cleanUrl,
   getShortName,
@@ -56,7 +60,8 @@ export function importAnalysisPlugin(): Plugin {
         // str.slice(s, e) => 'react'
         const { s: modStart, e: modEnd, n: modSource } = importInfo;
         if (!modSource) continue;
-
+        
+        if (!modSource || isInternalRequest(modSource)) continue;
         // 静态资源
         if (modSource.endsWith(".svg")) {
           // 加上 ?import 后缀
