@@ -35,6 +35,7 @@ export function importAnalysisPlugin(): Plugin {
       // 解析 import 语句
       const [imports] = parse(code);
       const ms = new MagicString(code);
+
       const resolve = async (id: string, importer: string) => {
         const resolved = await serverContext.pluginContainer.resolveId(
           id,
@@ -47,10 +48,11 @@ export function importAnalysisPlugin(): Plugin {
         const mod = moduleGraph.getModuleById(cleanedId);
         let resolvedId = `/${getShortName(resolved.id, serverContext.root)}`;
         if (mod && mod.lastHMRTimestamp > 0) {
-          // resolvedId += "?t=" + mod.lastHMRTimestamp;
+           resolvedId += "?t=" + mod.lastHMRTimestamp;
         }
         return resolvedId;
       };
+
       const { moduleGraph } = serverContext;
       const curMod = moduleGraph.getModuleById(id)!;
       const importedModules = new Set<string>();
@@ -95,7 +97,10 @@ export function importAnalysisPlugin(): Plugin {
             )});`
         );
       }
+
+      //构建依赖过程
       moduleGraph.updateModuleInfo(curMod, importedModules);
+      
       return {
         code: ms.toString(),
         // 生成 SourceMap

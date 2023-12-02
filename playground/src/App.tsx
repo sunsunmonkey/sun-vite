@@ -13,10 +13,10 @@ function App() {
       <Test></Test>
       <header className="App-header">
         <img className="App-logo" alt="" src={logo} />
-        <p>Hesllo hllsite +sssssssss </p>
+        <p>Hesllo hllsite +sss1s1sssss </p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is:s {count}
+            cosunt iss:s {count}
           </button>
         </p>
         <p>
