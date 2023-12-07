@@ -48,6 +48,7 @@ export function importAnalysisPlugin(): Plugin {
         const mod = moduleGraph.getModuleById(cleanedId);
         let resolvedId = `/${getShortName(resolved.id, serverContext.root)}`;
         if (mod && mod.lastHMRTimestamp > 0) {
+          //热更新的id
            resolvedId += "?t=" + mod.lastHMRTimestamp;
         }
         return resolvedId;

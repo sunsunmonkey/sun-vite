@@ -22,6 +22,7 @@ export function createWebSocketServer(server: connect.Server): {
   return {
     send(payload: Object) {
       const stringified = JSON.stringify(payload);
+      //发送给所有客户端
       wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(stringified);
